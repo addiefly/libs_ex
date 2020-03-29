@@ -53,7 +53,7 @@ def handle_express(line):
     return line
 
 
-print(u"开始话筒校验")
+print(u"开始话统校验")
 result = True
 fail_details = {}
 print(Rules)
@@ -66,4 +66,4 @@ for index in Rules.index:
         fail_details.update({Rules[index]: handle_express(Rules[index])})
 
 if not result:
-    print(u"话筒校验出现异常，异常情况为{}".format(fail_details))
+    print(u"话统校验出现异常，异常情况为{}".format(fail_details))
