@@ -5,7 +5,8 @@ import pandas as pd
 
 # file_name = "../docs/匹配规则.xlsx"
 file_name = os.path.join('..', 'docs', '匹配规则.xlsx')
-df = pd.read_excel(file_name)
+sheet_name = 'l3traffic'
+df = pd.read_excel(file_name, sheet_name)
 Rules = (df['Rules'])
 
 
@@ -38,9 +39,8 @@ def handle_express(line):
     results = re.findall('N.*?[ <>=()\-\+]', line)
     for result in results:
         match_str.append(result[:-1])
-    # 做一个倒序排列，防止后面替换的时候因为有重复，短的把长的部分也覆盖了，所以把长的放前面
+    # 做一个倒序排列，防止后面替换的时候因为有重复，短的把长的部分也覆盖了，所以把长的放前面先进行替换处理
     match_str = sorted(match_str, reverse=True)
-    print(match_str)
 
     for match in match_str:
         rst = re.findall(match, line)
@@ -58,9 +58,9 @@ result = True
 fail_details = {}
 print(Rules)
 for index in Rules.index:
-    print(Rules[index])
-    print(handle_express(Rules[index]))
-    print(eval(handle_express(Rules[index])))
+    # print(Rules[index])
+    # print(handle_express(Rules[index]))
+    # print(eval(handle_express(Rules[index])))
     if not eval(handle_express(Rules[index])):
         result = False
         fail_details.update({Rules[index]: handle_express(Rules[index])})
