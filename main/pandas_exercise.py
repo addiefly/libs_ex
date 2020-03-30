@@ -34,9 +34,14 @@ def string2code(string):
 
 
 def handle_express(line):
+    """
+    对字符串公式进行处理，获取数值并替换，得到计算结果
+    :param line:
+    :return:
+    """
     match_str = []
     # 找到N.开头并且结尾为<>=+-的字符串
-    results = re.findall('N.*?[ <>=()\-\+]', line)
+    results = re.findall('[A-z].*?[ <>=()\-\+]', line)
     for result in results:
         match_str.append(result[:-1])
     # 做一个倒序排列，防止后面替换的时候因为有重复，短的把长的部分也覆盖了，所以把长的放前面先进行替换处理
@@ -50,7 +55,7 @@ def handle_express(line):
     # 如果不是>=或<=， 把=替换为 ==
     if re.findall('[^><]=', line):
         line = line.replace('=', '==')
-    return line
+    return eval(line)
 
 
 print(u"开始话统校验")
@@ -60,8 +65,7 @@ print(Rules)
 for index in Rules.index:
     # print(Rules[index])
     # print(handle_express(Rules[index]))
-    # print(eval(handle_express(Rules[index])))
-    if not eval(handle_express(Rules[index])):
+    if not handle_express(Rules[index]):
         result = False
         fail_details.update({Rules[index]: handle_express(Rules[index])})
 

@@ -35,7 +35,5 @@ def change_express(line):
 
 print(change_express(a))
 
-print(sorted(["aaaaaaaa", "aaaaaaaaaaaaa"], reverse=True))
-print(sorted(["bbbbbbbbbbbb", "aaaaaaaaaaaaa"], reverse=True))
-print(sorted(["cccccccccc", "aaaaaaaaaaaaa"], reverse=True))
-print(sorted(["ddddddddd", "aaaaaaaaaaaaa"], reverse=True))
+
+print(re.findall('[A-z].*?[><=()\+\-]', a))
